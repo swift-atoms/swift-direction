@@ -88,7 +88,7 @@ The root `Direction Primitive` target holds the type and has zero external depen
 ## Community
 
 <!-- BEGIN: discussion -->
-*Discussion thread will be created at first public flip.*
+*Discussion thread will be created at first public release.*
 <!-- END: discussion -->
 
 ## License
