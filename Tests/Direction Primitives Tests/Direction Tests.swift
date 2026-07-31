@@ -7,6 +7,12 @@ import Testing
 
 @Suite
 struct `Direction - Static Functions` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Direction - Static Functions`.Unit {
     @Test(arguments: [Direction.positive, Direction.negative])
     func `opposite is involution`(direction: Direction) {
         #expect(Direction.opposite(of: Direction.opposite(of: direction)) == direction)
@@ -27,6 +33,12 @@ struct `Direction - Static Functions` {
 
 @Suite
 struct `Direction - Properties` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Direction - Properties`.Unit {
     @Test(arguments: [Direction.positive, Direction.negative])
     func `opposite property delegates to static function`(direction: Direction) {
         #expect(direction.opposite == Direction.opposite(of: direction))
@@ -47,6 +59,12 @@ struct `Direction - Properties` {
 
 @Suite
 struct `Direction - Initializers` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Direction - Initializers`.Unit {
     @Test
     func `init from non-negative sign creates positive`() {
         #expect(Direction(sign: 0) == .positive)
@@ -65,6 +83,12 @@ struct `Direction - Initializers` {
 
 @Suite
 struct `Direction - Protocol Conformances` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Direction - Protocol Conformances`.Unit {
     @Test(arguments: [Direction.positive, Direction.negative])
     func `Equatable reflexivity`(direction: Direction) {
         #expect(direction == direction)
@@ -86,6 +110,12 @@ struct `Direction - Protocol Conformances` {
 
 @Suite
 struct `Direction - Comparison` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
+
+extension `Direction - Comparison`.Unit {
     @Test
     func `negative precedes positive`() {
         #expect(Direction.negative < Direction.positive)
