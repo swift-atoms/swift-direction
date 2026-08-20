@@ -76,10 +76,9 @@ extension Direction {
 
 // `Direction` is a payload-less enum, so the compiler provides `Equatable` / `Hashable`
 // implicitly. The `==` / `<` / `hash(into:)` members are declared HERE in the type's own
-// module so they witness BOTH the implicit stdlib conformances AND the institute
-// `Equation.Protocol` / `Hash.Protocol` / `Comparison.Protocol` twins (whose fork forms
-// under Swift <6.4 require explicitly-declared `borrowing` witnesses that the synthesized
-// ones do not provide). The twin conformances live — empty — in the
+// module so they witness both the stdlib conformances and the Institute
+// `Equation.Protocol` / `Hash.Protocol` / `Comparison.Protocol` twins.
+// The twin conformances live — empty — in the
 // `Direction Equation/Hash/Comparison Primitives` sub-targets.
 
 extension Direction {
