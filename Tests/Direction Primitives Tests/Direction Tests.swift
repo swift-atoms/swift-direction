@@ -1,9 +1,5 @@
-// Direction Tests.swift
-
 import Direction_Primitives
 import Testing
-
-// MARK: - Direction - Static Functions
 
 @Suite
 struct `Direction - Static Functions` {
@@ -29,8 +25,6 @@ extension `Direction - Static Functions`.Unit {
     }
 }
 
-// MARK: - Direction - Properties
-
 @Suite
 struct `Direction - Properties` {
     @Suite struct Unit {}
@@ -55,8 +49,6 @@ extension `Direction - Properties`.Unit {
     }
 }
 
-// MARK: - Direction - Initializers
-
 @Suite
 struct `Direction - Initializers` {
     @Suite struct Unit {}
@@ -78,8 +70,6 @@ extension `Direction - Initializers`.Unit {
         #expect(Direction(sign: -100) == .negative)
     }
 }
-
-// MARK: - Direction - Protocol Conformances
 
 @Suite
 struct `Direction - Protocol Conformances` {
@@ -105,8 +95,6 @@ extension `Direction - Protocol Conformances`.Unit {
         #expect(set.count == 2)
     }
 }
-
-// MARK: - Direction - Comparison
 
 @Suite
 struct `Direction - Comparison` {

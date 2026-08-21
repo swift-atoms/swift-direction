@@ -11,13 +11,12 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        // MARK: - Namespace
+
         .library(
             name: "Direction Primitive",
             targets: ["Direction Primitive"]
         ),
 
-        // MARK: - Sub-namespace targets
         .library(
             name: "Direction Equation Primitives",
             targets: ["Direction Equation Primitives"]
@@ -31,13 +30,11 @@ let package = Package(
             targets: ["Direction Comparison Primitives"]
         ),
 
-        // MARK: - Umbrella
         .library(
             name: "Direction Primitives",
             targets: ["Direction Primitives"]
         ),
 
-        // MARK: - Test Support
         .library(
             name: "Direction Primitives Test Support",
             targets: ["Direction Primitives Test Support"]
@@ -58,13 +55,12 @@ let package = Package(
         ),
     ],
     targets: [
-        // MARK: - Namespace (zero external dependencies — [MOD-017])
+
         .target(
             name: "Direction Primitive",
             dependencies: []
         ),
 
-        // MARK: - Sub-namespace targets (per [MOD-031]): institute Equatable/Hashable/Comparable twins
         .target(
             name: "Direction Equation Primitives",
             dependencies: [
@@ -87,7 +83,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Umbrella
         .target(
             name: "Direction Primitives",
             dependencies: [
@@ -98,7 +93,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Test Support
         .target(
             name: "Direction Primitives Test Support",
             dependencies: [
@@ -107,7 +101,6 @@ let package = Package(
             path: "Tests/Support"
         ),
 
-        // MARK: - Tests
         .testTarget(
             name: "Direction Primitives Tests",
             dependencies: [
