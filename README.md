@@ -1,4 +1,4 @@
-# Direction Primitives
+# Direction
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
 
@@ -11,7 +11,7 @@ The canonical binary orientation for Swift — a pure positive/negative polarity
 `Direction` is a two-case enum — `.positive` / `.negative` — modelling pure polarity, isomorphic to `Z/2Z`, `Bool`, and the multiplicative group `{-1, +1}`. It is the atomic sign factor underlying oriented and composite spatial types, so it stays free of any axis or coordinate meaning.
 
 ```swift
-import Direction_Primitives
+import Direction
 
 let forward: Direction = .positive
 
@@ -31,7 +31,7 @@ Direction(sign: 0)          // .positive
 [Direction.positive, .negative].sorted()   // [.negative, .positive]
 ```
 
-`Direction` does not decide *which* axis or coordinate is being oriented. Domain-specific orientations (`Horizontal`, `Vertical`, `Depth`, `Temporal`) and the `Orientation` abstraction live in `swift-dimension-primitives`, which conforms `Direction` to `Orientation` retroactively so this package stays dependency-free.
+`Direction` does not decide *which* axis or coordinate is being oriented. Domain-specific orientations (`Horizontal`, `Vertical`, `Depth`, `Temporal`) and the `Orientation` abstraction live in `swift-dimension`, which conforms `Direction` to `Orientation` retroactively so this package stays dependency-free.
 
 ---
 
@@ -39,7 +39,7 @@ Direction(sign: 0)          // .positive
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-primitives/swift-direction-primitives.git", branch: "main")
+    .package(url: "https://github.com/swift-molecules/swift-direction.git", branch: "main")
 ]
 ```
 
@@ -47,7 +47,7 @@ dependencies: [
 .target(
     name: "App",
     dependencies: [
-        .product(name: "Direction Primitives", package: "swift-direction-primitives"),
+        .product(name: "Direction", package: "swift-direction"),
     ]
 )
 ```
@@ -63,11 +63,11 @@ The root `Direction Primitive` target holds the type and has zero external depen
 | Product | When to import |
 |---------|----------------|
 | `Direction Primitive` | The `Direction` enum, its `opposite` / `sign` operations, the stdlib `Equatable` / `Hashable` / `Comparable` operators, and conditional `Codable`. No external dependencies. |
-| `Direction Equation Primitives` | Conformance of `Direction` to the institute `Equation.Protocol`. |
-| `Direction Hash Primitives` | Conformance of `Direction` to the institute `Hash.Protocol`. |
-| `Direction Comparison Primitives` | Conformance of `Direction` to the institute `Comparison.Protocol`. |
-| `Direction Primitives` (umbrella) | Re-exports all of the above — the default import for most consumers. |
-| `Direction Primitives Test Support` | Re-exports the umbrella for test consumers. |
+| `Direction Equation` | Conformance of `Direction` to the institute `Equation.Protocol`. |
+| `Direction Hash` | Conformance of `Direction` to the institute `Hash.Protocol`. |
+| `Direction Comparison` | Conformance of `Direction` to the institute `Comparison.Protocol`. |
+| `Direction` (umbrella) | Re-exports all of the above — the default import for most consumers. |
+| `Direction Test Support` | Re-exports the umbrella for test consumers. |
 
 ---
 

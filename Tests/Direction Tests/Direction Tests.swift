@@ -1,4 +1,4 @@
-import Direction_Primitives
+import Direction
 import Testing
 
 @Suite
