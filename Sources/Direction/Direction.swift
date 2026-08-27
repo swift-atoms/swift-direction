@@ -69,7 +69,3 @@ extension Direction {
         hasher.combine(sign)
     }
 }
-
-#if !hasFeature(Embedded)
-    extension Direction: Codable {}
-#endif
