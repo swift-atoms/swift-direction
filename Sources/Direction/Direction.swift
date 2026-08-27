@@ -37,7 +37,7 @@ extension Direction {
     }
 }
 
-extension Direction {
+extension Direction: Comparable {
 
     @inlinable
     public static func == (lhs: Direction, rhs: Direction) -> Bool {
