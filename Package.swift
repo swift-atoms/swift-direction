@@ -13,14 +13,10 @@ let package = Package(
     products: [
 
         .library(
-            name: "Direction Primitive",
-            targets: ["Direction Primitive"]
+            name: "Direction",
+            targets: ["Direction"]
         ),
 
-        .library(
-            name: "Direction Equation",
-            targets: ["Direction Equation"]
-        ),
         .library(
             name: "Direction Hash",
             targets: ["Direction Hash"]
@@ -29,83 +25,54 @@ let package = Package(
             name: "Direction Comparison",
             targets: ["Direction Comparison"]
         ),
-
-        .library(
-            name: "Direction",
-            targets: ["Direction"]
-        ),
-
-        .library(
-            name: "Direction Test Support",
-            targets: ["Direction Test Support"]
-        ),
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-equation.git",
+            url: "https://github.com/swift-atoms/swift-hash.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-hash.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-comparison.git",
+            url: "https://github.com/swift-atoms/swift-comparison.git",
             branch: "main"
         ),
     ],
     targets: [
 
         .target(
-            name: "Direction Primitive",
+            name: "Direction",
             dependencies: []
         ),
 
         .target(
-            name: "Direction Equation",
-            dependencies: [
-                "Direction Primitive",
-                .product(name: "Equation", package: "swift-equation"),
-            ]
-        ),
-        .target(
             name: "Direction Hash",
             dependencies: [
-                "Direction Primitive",
-                .product(name: "Hash", package: "swift-hash"),
+                .target(name: "Direction"),
+                .product(name: "Hash Protocol", package: "swift-hash"),
             ]
         ),
         .target(
             name: "Direction Comparison",
             dependencies: [
-                "Direction Primitive",
-                .product(name: "Comparison", package: "swift-comparison"),
+                .target(name: "Direction"),
+                .product(name: "Comparison Protocol", package: "swift-comparison"),
             ]
         ),
-
-        .target(
-            name: "Direction",
-            dependencies: [
-                "Direction Primitive",
-                "Direction Equation",
-                "Direction Hash",
-                "Direction Comparison",
-            ]
-        ),
-
-        .target(
-            name: "Direction Test Support",
-            dependencies: [
-                "Direction"
-            ],
-            path: "Tests/Support"
-        ),
-
         .testTarget(
             name: "Direction Tests",
             dependencies: [
-                "Direction",
-                "Direction Test Support",
+                .target(name: "Direction"),
+            ]
+        ),
+        .testTarget(
+            name: "Direction Hash Tests",
+            dependencies: [
+                .target(name: "Direction Hash"),
+            ]
+        ),
+        .testTarget(
+            name: "Direction Comparison Tests",
+            dependencies: [
+                .target(name: "Direction Comparison"),
             ]
         ),
     ],

@@ -11,7 +11,7 @@ The canonical binary orientation for Swift — a pure positive/negative polarity
 `Direction` is a two-case enum — `.positive` / `.negative` — modelling pure polarity, isomorphic to `Z/2Z`, `Bool`, and the multiplicative group `{-1, +1}`. It is the atomic sign factor underlying oriented and composite spatial types, so it stays free of any axis or coordinate meaning.
 
 ```swift
-import Direction
+import Direction_Comparison
 
 let forward: Direction = .positive
 
@@ -27,7 +27,7 @@ Direction.negative.sign     // -1
 Direction(sign: -3)         // .negative
 Direction(sign: 0)          // .positive
 
-// Equatable, Hashable, and Comparable are available; .negative precedes .positive.
+// Comparison is available from Direction Comparison; .negative precedes .positive.
 [Direction.positive, .negative].sorted()   // [.negative, .positive]
 ```
 
@@ -39,7 +39,7 @@ Direction(sign: 0)          // .positive
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-molecules/swift-direction.git", branch: "main")
+    .package(url: "https://github.com/swift-atoms/swift-direction.git", branch: "main")
 ]
 ```
 
@@ -58,16 +58,13 @@ Requires Swift 6.3.1 and macOS 26 / iOS 26 / tvOS 26 / watchOS 26 / visionOS 26 
 
 ## Architecture
 
-The root `Direction Primitive` target holds the type and has zero external dependencies. Each sibling target adds one institute conformance and depends only on its corresponding primitive. The umbrella re-exports them all.
+The base `Direction` target holds the type and has zero external dependencies. Each sibling target adds one institute conformance and depends on the base module.
 
 | Product | When to import |
 |---------|----------------|
-| `Direction Primitive` | The `Direction` enum, its `opposite` / `sign` operations, the stdlib `Equatable` / `Hashable` / `Comparable` operators, and conditional `Codable`. No external dependencies. |
-| `Direction Equation` | Conformance of `Direction` to the institute `Equation.Protocol`. |
-| `Direction Hash` | Conformance of `Direction` to the institute `Hash.Protocol`. |
-| `Direction Comparison` | Conformance of `Direction` to the institute `Comparison.Protocol`. |
-| `Direction` (umbrella) | Re-exports all of the above — the default import for most consumers. |
-| `Direction Test Support` | Re-exports the umbrella for test consumers. |
+| `Direction` | The `Direction` enum, its `opposite` / `sign` operations and operators, and conditional `Codable`. No external dependencies. |
+| `Direction Hash` | Conformance of `Direction` to `Hash.Protocol`. |
+| `Direction Comparison` | Conformance of `Direction` to `Comparison.Protocol`. |
 
 ---
 

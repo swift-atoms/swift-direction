@@ -1,4 +1,4 @@
-public import Direction_Primitive
-public import Hash
+public import Direction
+public import Hash_Protocol
 
-extension Direction: Hash.`Protocol` {}
+extension Direction::Direction: Hash::Hash.`Protocol` {}

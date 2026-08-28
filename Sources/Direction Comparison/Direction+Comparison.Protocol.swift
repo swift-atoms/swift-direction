@@ -1,4 +1,4 @@
-public import Comparison
-public import Direction_Primitive
+public import Comparison_Protocol
+public import Direction
 
-extension Direction: Comparison.`Protocol` {}
+extension Direction::Direction: Comparison::Comparison.`Protocol` {}
