@@ -66,12 +66,14 @@ let package = Package(
         .testTarget(
             name: "Direction Hash Tests",
             dependencies: [
+                .target(name: "Direction"),
                 .target(name: "Direction Hash"),
             ]
         ),
         .testTarget(
             name: "Direction Comparison Tests",
             dependencies: [
+                .target(name: "Direction"),
                 .target(name: "Direction Comparison"),
             ]
         ),

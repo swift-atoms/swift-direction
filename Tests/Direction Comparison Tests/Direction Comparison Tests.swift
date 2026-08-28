@@ -1,3 +1,4 @@
+import Direction
 import Direction_Comparison
 import Testing
 
