@@ -37,7 +37,7 @@ extension Direction {
     }
 }
 
-extension Direction: Comparable {
+extension Direction {
 
     @inlinable
     public static func == (lhs: Direction, rhs: Direction) -> Bool {
@@ -69,3 +69,7 @@ extension Direction: Comparable {
         hasher.combine(sign)
     }
 }
+
+#if !hasFeature(Embedded)
+    extension Direction: Codable {}
+#endif

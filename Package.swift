@@ -1,5 +1,4 @@
 // swift-tools-version: 6.4
-
 import PackageDescription
 
 let package = Package(
@@ -12,40 +11,102 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
+
+        .library(
+            name: "Direction Primitive",
+            targets: ["Direction Primitive"]
+        ),
+
+        .library(
+            name: "Direction Equation",
+            targets: ["Direction Equation"]
+        ),
+        .library(
+            name: "Direction Hash",
+            targets: ["Direction Hash"]
+        ),
+        .library(
+            name: "Direction Comparison",
+            targets: ["Direction Comparison"]
+        ),
+
         .library(
             name: "Direction",
             targets: ["Direction"]
         ),
+
         .library(
-            name: "Direction Standard Library Integration",
-            targets: ["Direction Standard Library Integration"]
-        ),
-        .library(
-            name: "Direction Apple Foundation Integration",
-            targets: ["Direction Apple Foundation Integration"]
+            name: "Direction Test Support",
+            targets: ["Direction Test Support"]
         ),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(
+            url: "https://github.com/swift-molecules/swift-equation.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-molecules/swift-hash.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-molecules/swift-comparison.git",
+            branch: "main"
+        ),
+    ],
     targets: [
+
         .target(
-            name: "Direction",
+            name: "Direction Primitive",
             dependencies: []
         ),
+
         .target(
-            name: "Direction Standard Library Integration",
-            dependencies: ["Direction"]
-        ),
-        .target(
-            name: "Direction Apple Foundation Integration",
+            name: "Direction Equation",
             dependencies: [
-                "Direction",
-                "Direction Standard Library Integration",
+                "Direction Primitive",
+                .product(name: "Equation", package: "swift-equation"),
             ]
         ),
+        .target(
+            name: "Direction Hash",
+            dependencies: [
+                "Direction Primitive",
+                .product(name: "Hash", package: "swift-hash"),
+            ]
+        ),
+        .target(
+            name: "Direction Comparison",
+            dependencies: [
+                "Direction Primitive",
+                .product(name: "Comparison", package: "swift-comparison"),
+            ]
+        ),
+
+        .target(
+            name: "Direction",
+            dependencies: [
+                "Direction Primitive",
+                "Direction Equation",
+                "Direction Hash",
+                "Direction Comparison",
+            ]
+        ),
+
+        .target(
+            name: "Direction Test Support",
+            dependencies: [
+                "Direction"
+            ],
+            path: "Tests/Support"
+        ),
+
         .testTarget(
             name: "Direction Tests",
-            dependencies: ["Direction"],
-            path: "Tests/Direction Tests"
+            dependencies: [
+                "Direction",
+                "Direction Test Support",
+            ]
         ),
     ],
     swiftLanguageModes: [.v6]
