@@ -25,6 +25,18 @@ let package = Package(
             name: "Direction Comparison",
             targets: ["Direction Comparison"]
         ),
+        .library(
+            name: "Orientation",
+            targets: ["Orientation"]
+        ),
+        .library(
+            name: "Chirality",
+            targets: ["Chirality"]
+        ),
+        .library(
+            name: "Winding",
+            targets: ["Winding"]
+        ),
     ],
     dependencies: [
         .package(
@@ -33,6 +45,10 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-comparison.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-atoms/swift-pair.git",
             branch: "main"
         ),
     ],
@@ -57,6 +73,25 @@ let package = Package(
                 .product(name: "Comparison Protocol", package: "swift-comparison"),
             ]
         ),
+        .target(
+            name: "Orientation",
+            dependencies: [
+                .target(name: "Direction"),
+                .product(name: "Pair", package: "swift-pair"),
+            ]
+        ),
+        .target(
+            name: "Chirality",
+            dependencies: [
+                .product(name: "Pair", package: "swift-pair"),
+            ]
+        ),
+        .target(
+            name: "Winding",
+            dependencies: [
+                .product(name: "Pair", package: "swift-pair"),
+            ]
+        ),
         .testTarget(
             name: "Direction Tests",
             dependencies: [
@@ -75,6 +110,28 @@ let package = Package(
             dependencies: [
                 .target(name: "Direction"),
                 .target(name: "Direction Comparison"),
+            ]
+        ),
+        .testTarget(
+            name: "Orientation Tests",
+            dependencies: [
+                .target(name: "Direction"),
+                .target(name: "Orientation"),
+                .product(name: "Pair", package: "swift-pair"),
+            ]
+        ),
+        .testTarget(
+            name: "Chirality Tests",
+            dependencies: [
+                .target(name: "Chirality"),
+                .product(name: "Pair", package: "swift-pair"),
+            ]
+        ),
+        .testTarget(
+            name: "Winding Tests",
+            dependencies: [
+                .target(name: "Winding"),
+                .product(name: "Pair", package: "swift-pair"),
             ]
         ),
     ],

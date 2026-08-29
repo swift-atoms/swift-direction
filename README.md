@@ -31,7 +31,7 @@ Direction(sign: 0)          // .positive
 [Direction.positive, .negative].sorted()   // [.negative, .positive]
 ```
 
-`Direction` does not decide *which* axis or coordinate is being oriented. Domain-specific orientations (`Horizontal`, `Vertical`, `Depth`, `Temporal`) and the `Orientation` abstraction live in `swift-dimension`, which conforms `Direction` to `Orientation` retroactively so this package stays dependency-free.
+`Direction` does not decide *which* axis or coordinate is being oriented. Domain-specific orientations (`Horizontal`, `Vertical`, `Depth`, `Temporal`) and the `Orientation` abstraction live in this package's `Orientation` product, which conforms `Direction` to `Orientation` retroactively so the base `Direction` target stays dependency-free.
 
 ---
 
@@ -65,6 +65,9 @@ The base `Direction` target holds the type and has zero external dependencies. E
 | `Direction` | The `Direction` enum, its `opposite` / `sign` operations and operators, and conditional `Codable`. No external dependencies. |
 | `Direction Hash` | Conformance of `Direction` to `Hash.Protocol`. |
 | `Direction Comparison` | Conformance of `Direction` to `Comparison.Protocol`. |
+| `Orientation` | The `Orientation` protocol, the `Horizontal` / `Vertical` / `Depth` / `Temporal` orientation enums, their `Direction` conversions, and the `Pair`-backed `Oriented` / `Orientation.Value` carriers. |
+| `Chirality` | The `Chirality` enum and its `Pair`-backed `Chirality.Value` alias. |
+| `Winding` | The `Winding` enum and its `Pair`-backed `Winding.Value` alias. |
 
 ---
 
