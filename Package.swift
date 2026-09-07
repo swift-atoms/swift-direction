@@ -11,32 +11,10 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-
-        .library(
-            name: "Direction",
-            targets: ["Direction"]
-        ),
-
-        .library(
-            name: "Direction Hash",
-            targets: ["Direction Hash"]
-        ),
-        .library(
-            name: "Direction Comparison",
-            targets: ["Direction Comparison"]
-        ),
-        .library(
-            name: "Orientation",
-            targets: ["Orientation"]
-        ),
-        .library(
-            name: "Chirality",
-            targets: ["Chirality"]
-        ),
-        .library(
-            name: "Winding",
-            targets: ["Winding"]
-        ),
+        .library(name: "Direction", targets: ["Direction"]),
+        .library(name: "Direction Standard Library Integration", targets: ["Direction Standard Library Integration"]),
+        .library(name: "Direction Foundation Library Integration", targets: ["Direction Foundation Library Integration"]),
+        .library(name: "Direction Test Support", targets: ["Direction Test Support"]),
     ],
     dependencies: [
         .package(
@@ -53,93 +31,54 @@ let package = Package(
         ),
     ],
     targets: [
-
         .target(
             name: "Direction",
-            dependencies: []
+            dependencies: [
+                .product(name: "Hash", package: "swift-hash"),
+                .product(name: "Comparison", package: "swift-comparison"),
+                .product(name: "Pair", package: "swift-pair"),
+            ],
+            path: "Sources/Direction"
         ),
-
         .target(
-            name: "Direction Hash",
+            name: "Direction Standard Library Integration",
             dependencies: [
                 .target(name: "Direction"),
-                .product(name: "Hash Protocol", package: "swift-hash"),
-            ]
+            ],
+            path: "Sources/Direction Standard Library Integration"
         ),
         .target(
-            name: "Direction Comparison",
+            name: "Direction Foundation Library Integration",
             dependencies: [
                 .target(name: "Direction"),
-                .product(name: "Comparison Protocol", package: "swift-comparison"),
-            ]
+                .target(name: "Direction Standard Library Integration"),
+            ],
+            path: "Sources/Direction Foundation Library Integration"
         ),
         .target(
-            name: "Orientation",
+            name: "Direction Test Support",
             dependencies: [
                 .target(name: "Direction"),
-                .product(name: "Pair", package: "swift-pair"),
-            ]
-        ),
-        .target(
-            name: "Chirality",
-            dependencies: [
-                .product(name: "Pair", package: "swift-pair"),
-            ]
-        ),
-        .target(
-            name: "Winding",
-            dependencies: [
-                .product(name: "Pair", package: "swift-pair"),
-            ]
+            ],
+            path: "Tests/Support"
         ),
         .testTarget(
             name: "Direction Tests",
             dependencies: [
                 .target(name: "Direction"),
-            ]
-        ),
-        .testTarget(
-            name: "Direction Hash Tests",
-            dependencies: [
-                .target(name: "Direction"),
-                .target(name: "Direction Hash"),
-            ]
-        ),
-        .testTarget(
-            name: "Direction Comparison Tests",
-            dependencies: [
-                .target(name: "Direction"),
-                .target(name: "Direction Comparison"),
-            ]
-        ),
-        .testTarget(
-            name: "Orientation Tests",
-            dependencies: [
-                .target(name: "Direction"),
-                .target(name: "Orientation"),
                 .product(name: "Pair", package: "swift-pair"),
-            ]
-        ),
-        .testTarget(
-            name: "Chirality Tests",
-            dependencies: [
-                .target(name: "Chirality"),
-                .product(name: "Pair", package: "swift-pair"),
-            ]
-        ),
-        .testTarget(
-            name: "Winding Tests",
-            dependencies: [
-                .target(name: "Winding"),
-                .product(name: "Pair", package: "swift-pair"),
-            ]
+                .target(name: "Direction Test Support"),
+                .target(name: "Direction Standard Library Integration"),
+                .target(name: "Direction Foundation Library Integration"),
+            ],
+            path: "Tests/Direction Tests"
         ),
     ],
     swiftLanguageModes: [.v6]
 )
 
-for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    let ecosystem: [SwiftSetting] = [
+for target in package.targets {
+    target.swiftSettings = [
         .strictMemorySafety(),
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
@@ -148,8 +87,4 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableExperimentalFeature("Lifetimes"),
         .enableUpcomingFeature("InferIsolatedConformances"),
     ]
-
-    let package: [SwiftSetting] = []
-
-    target.swiftSettings = (target.swiftSettings ?? []) + ecosystem + package
 }
