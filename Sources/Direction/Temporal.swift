@@ -33,16 +33,6 @@ extension Temporal {
     public var isPast: Bool { self == .past }
 }
 
-extension Temporal: CustomStringConvertible {
-
-    public var description: String {
-        switch self {
-        case .future: return "future"
-        case .past: return "past"
-        }
-    }
-}
-
 #if !hasFeature(Embedded)
-    extension Temporal: Codable {}
+extension Temporal: Swift.Codable {}
 #endif

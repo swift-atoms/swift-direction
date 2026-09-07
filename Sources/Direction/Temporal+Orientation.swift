@@ -1,4 +1,3 @@
-
 extension Temporal: Orientation {
 
     @inlinable

@@ -33,16 +33,6 @@ extension Depth {
     public var isBackward: Bool { self == .backward }
 }
 
-extension Depth: CustomStringConvertible {
-
-    public var description: String {
-        switch self {
-        case .forward: return "forward"
-        case .backward: return "backward"
-        }
-    }
-}
-
 #if !hasFeature(Embedded)
-    extension Depth: Codable {}
+extension Depth: Swift.Codable {}
 #endif

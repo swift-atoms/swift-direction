@@ -40,5 +40,5 @@ extension Chirality {
 }
 
 #if !hasFeature(Embedded)
-    extension Chirality: Codable {}
+extension Chirality: Swift.Codable {}
 #endif

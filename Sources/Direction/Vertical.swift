@@ -33,16 +33,6 @@ extension Vertical {
     public var isDownward: Bool { self == .downward }
 }
 
-extension Vertical: CustomStringConvertible {
-
-    public var description: String {
-        switch self {
-        case .upward: return "upward"
-        case .downward: return "downward"
-        }
-    }
-}
-
 #if !hasFeature(Embedded)
-    extension Vertical: Codable {}
+extension Vertical: Swift.Codable {}
 #endif

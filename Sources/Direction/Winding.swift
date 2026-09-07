@@ -37,5 +37,5 @@ extension Winding {
 }
 
 #if !hasFeature(Embedded)
-    extension Winding: Codable {}
+extension Winding: Swift.Codable {}
 #endif

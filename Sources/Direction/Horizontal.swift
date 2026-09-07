@@ -33,16 +33,6 @@ extension Horizontal {
     public var isLeftward: Bool { self == .leftward }
 }
 
-extension Horizontal: CustomStringConvertible {
-
-    public var description: String {
-        switch self {
-        case .rightward: return "rightward"
-        case .leftward: return "leftward"
-        }
-    }
-}
-
 #if !hasFeature(Embedded)
-    extension Horizontal: Codable {}
+extension Horizontal: Swift.Codable {}
 #endif

@@ -1,4 +1,3 @@
-
 extension Vertical: Orientation {
 
     @inlinable

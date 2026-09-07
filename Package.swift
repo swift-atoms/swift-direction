@@ -12,8 +12,8 @@ let package = Package(
     ],
     products: [
         .library(name: "Direction", targets: ["Direction"]),
-        .library(name: "Direction Standard Library Integration", targets: ["Direction Standard Library Integration"]),
-        .library(name: "Direction Foundation Library Integration", targets: ["Direction Foundation Library Integration"]),
+
+        .library(name: "Direction Foundation Integration", targets: ["Direction Foundation Integration"]),
         .library(name: "Direction Test Support", targets: ["Direction Test Support"]),
     ],
     dependencies: [
@@ -40,20 +40,13 @@ let package = Package(
             ],
             path: "Sources/Direction"
         ),
+        
         .target(
-            name: "Direction Standard Library Integration",
+            name: "Direction Foundation Integration",
             dependencies: [
                 .target(name: "Direction"),
             ],
-            path: "Sources/Direction Standard Library Integration"
-        ),
-        .target(
-            name: "Direction Foundation Library Integration",
-            dependencies: [
-                .target(name: "Direction"),
-                .target(name: "Direction Standard Library Integration"),
-            ],
-            path: "Sources/Direction Foundation Library Integration"
+            path: "Sources/Direction Foundation Integration"
         ),
         .target(
             name: "Direction Test Support",
@@ -68,8 +61,7 @@ let package = Package(
                 .target(name: "Direction"),
                 .product(name: "Pair", package: "swift-pair"),
                 .target(name: "Direction Test Support"),
-                .target(name: "Direction Standard Library Integration"),
-                .target(name: "Direction Foundation Library Integration"),
+                .target(name: "Direction Foundation Integration"),
             ],
             path: "Tests/Direction Tests"
         ),

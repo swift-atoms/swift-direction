@@ -1,4 +1,3 @@
-
 public protocol Orientation: Sendable, Hashable, CaseIterable where AllCases == [Self] {
 
     var opposite: Self { get }

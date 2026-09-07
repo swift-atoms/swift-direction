@@ -1,9 +1,3 @@
-
-extension Direction: CaseIterable {
-
-    public static var allCases: [Direction] { [.positive, .negative] }
-}
-
 extension Direction: Orientation {
 
     @inlinable
