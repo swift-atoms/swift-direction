@@ -3,7 +3,7 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Orientation Tests` {
+struct `Orientations preserve opposition and conversions through Direction` {
 
     @Test
     func `All orientation types conform to Orientation`() {
@@ -82,7 +82,7 @@ struct `Orientation Tests` {
     }
 
     @Test
-    func `Orientation from Bool`() {
+    func `Boolean construction selects the corresponding orientation case`() {
         #expect(Direction(true) == .positive)
         #expect(Direction(false) == .negative)
         #expect(Horizontal(true) == .rightward)
@@ -90,7 +90,7 @@ struct `Orientation Tests` {
     }
 
     @Test
-    func `isPositive and isNegative`() {
+    func `Orientation sign predicates distinguish positive and negative cases`() {
         #expect(Direction.positive.isPositive)
         #expect(!Direction.positive.isNegative)
         #expect(Direction.negative.isNegative)
@@ -114,7 +114,7 @@ struct `Orientation Tests` {
     }
 
     @Test
-    func `Convert between orientation types via Direction`() {
+    func `Conversion through Direction preserves orientation across types`() {
         func convert<From: Orientation, To: Orientation>(
             _ from: From,
             to _: To.Type
@@ -131,9 +131,9 @@ struct `Orientation Tests` {
     }
 }
 
-extension `Orientation Tests` {
+extension `Orientations preserve opposition and conversions through Direction` {
     @Suite
-    struct `Sum Product Duality` {
+    struct `Orientation wrappers preserve Direction identity and composition` {
         @Test
         func `Enum Direction and struct orientations are isomorphic`() {
 

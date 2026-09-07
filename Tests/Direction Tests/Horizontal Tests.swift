@@ -3,7 +3,7 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Horizontal Tests` {
+struct `Horizontal preserves intrinsic opposition predicates and conformances` {
 
     @Test(arguments: [Horizontal.rightward, Horizontal.leftward])
     func `opposite is intrinsic and involutive`(_ value: Horizontal) {

@@ -3,7 +3,7 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Winding - Static Functions` {
+struct `Winding opposition exchanges its two cases` {
     @Test(arguments: [Winding.clockwise, Winding.counterclockwise])
     func `opposite is involution`(winding: Winding) {
         #expect(Winding.opposite(of: Winding.opposite(of: winding)) == winding)
@@ -21,7 +21,7 @@ struct `Winding - Static Functions` {
 }
 
 @Suite
-struct `Winding - Properties` {
+struct `Winding properties preserve case identity and directional meaning` {
     @Test(arguments: [Winding.clockwise, Winding.counterclockwise])
     func `opposite property delegates to static function`(winding: Winding) {
         #expect(winding.opposite == Winding.opposite(of: winding))
@@ -39,7 +39,7 @@ struct `Winding - Properties` {
 }
 
 @Suite
-struct `Winding - Operators` {
+struct `Winding negation exchanges cases and is involutive` {
     @Test(arguments: [Winding.clockwise, Winding.counterclockwise])
     func `negation operator is involution`(winding: Winding) {
         #expect(!(!winding) == winding)
@@ -57,7 +57,7 @@ struct `Winding - Operators` {
 }
 
 @Suite
-struct `Winding - Protocol Conformances` {
+struct `Winding cases support enumeration equality and hashing` {
     @Test
     func `allCases contains exactly two cases`() {
         #expect(Winding.allCases.count == 2)
@@ -74,18 +74,18 @@ struct `Winding - Protocol Conformances` {
     }
 
     @Test(arguments: [Winding.clockwise, Winding.counterclockwise])
-    func `Equatable reflexivity`(winding: Winding) {
+    func `Winding equality is reflexive`(winding: Winding) {
         #expect(winding == winding)
     }
 
     @Test
-    func `Equatable symmetry`() {
+    func `Winding inequality is symmetric for distinct cases`() {
         #expect(Winding.clockwise != Winding.counterclockwise)
         #expect(Winding.counterclockwise != Winding.clockwise)
     }
 
     @Test
-    func `Hashable produces unique hashes`() {
+    func `Sets distinguish the two Winding cases`() {
         let set: Set<Winding> = [.clockwise, .counterclockwise, .clockwise]
         #expect(set.count == 2)
     }

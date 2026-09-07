@@ -3,7 +3,7 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Horizontal - Static Functions` {
+struct `Horizontal opposition exchanges its two cases` {
     @Test(arguments: [Horizontal.rightward, Horizontal.leftward])
     func `opposite is involution`(horizontal: Horizontal) {
         #expect(Horizontal.opposite(of: Horizontal.opposite(of: horizontal)) == horizontal)
@@ -21,7 +21,7 @@ struct `Horizontal - Static Functions` {
 }
 
 @Suite
-struct `Horizontal - Properties` {
+struct `Horizontal properties preserve case identity and directional meaning` {
     @Test(arguments: [Horizontal.rightward, Horizontal.leftward])
     func `opposite property delegates to static function`(horizontal: Horizontal) {
         #expect(horizontal.opposite == Horizontal.opposite(of: horizontal))
@@ -38,19 +38,19 @@ struct `Horizontal - Properties` {
     }
 
     @Test
-    func `isRightward property`() {
+    func `The rightward predicate identifies the rightward case`() {
         #expect(Horizontal.rightward.isRightward)
         #expect(!Horizontal.leftward.isRightward)
     }
 
     @Test
-    func `isLeftward property`() {
+    func `The leftward predicate identifies the leftward case`() {
         #expect(Horizontal.leftward.isLeftward)
         #expect(!Horizontal.rightward.isLeftward)
     }
 
     @Test(arguments: [Horizontal.rightward, Horizontal.leftward])
-    func `isPositive property`(horizontal: Horizontal) {
+    func `The positive predicate identifies positive Horizontal values`(horizontal: Horizontal) {
         if horizontal == .rightward {
             #expect(horizontal.isPositive)
         } else {
@@ -59,7 +59,7 @@ struct `Horizontal - Properties` {
     }
 
     @Test(arguments: [Horizontal.rightward, Horizontal.leftward])
-    func `isNegative property`(horizontal: Horizontal) {
+    func `The negative predicate identifies negative Horizontal values`(horizontal: Horizontal) {
         if horizontal == .leftward {
             #expect(horizontal.isNegative)
         } else {
@@ -69,7 +69,7 @@ struct `Horizontal - Properties` {
 }
 
 @Suite
-struct `Horizontal - Initializers` {
+struct `Horizontal construction maps directions and Boolean values to cases` {
     @Test
     func `init from positive direction creates rightward`() {
         #expect(Horizontal(direction: .positive) == .rightward)
@@ -81,7 +81,7 @@ struct `Horizontal - Initializers` {
     }
 
     @Test(arguments: [Horizontal.rightward, Horizontal.leftward])
-    func `direction roundtrip`(horizontal: Horizontal) {
+    func `Horizontal values round trip through Direction`(horizontal: Horizontal) {
         #expect(Horizontal(direction: horizontal.direction) == horizontal)
     }
 
@@ -97,7 +97,7 @@ struct `Horizontal - Initializers` {
 }
 
 @Suite
-struct `Horizontal - Protocol Conformances` {
+struct `Horizontal cases support enumeration equality and hashing` {
     @Test
     func `allCases contains exactly two cases`() {
         #expect(Horizontal.allCases.count == 2)
@@ -114,31 +114,31 @@ struct `Horizontal - Protocol Conformances` {
     }
 
     @Test(arguments: [Horizontal.rightward, Horizontal.leftward])
-    func `Equatable reflexivity`(horizontal: Horizontal) {
+    func `Horizontal equality is reflexive`(horizontal: Horizontal) {
         #expect(horizontal == horizontal)
     }
 
     @Test
-    func `Equatable symmetry`() {
+    func `Horizontal inequality is symmetric for distinct cases`() {
         #expect(Horizontal.rightward != Horizontal.leftward)
         #expect(Horizontal.leftward != Horizontal.rightward)
     }
 
     @Test
-    func `Hashable produces unique hashes`() {
+    func `Sets distinguish the two Horizontal cases`() {
         let set: Set<Horizontal> = [.rightward, .leftward, .rightward]
         #expect(set.count == 2)
     }
 
     @Test(arguments: [Horizontal.rightward, Horizontal.leftward])
-    func `description property`(horizontal: Horizontal) {
+    func `Horizontal descriptions name a valid case`(horizontal: Horizontal) {
         let desc = horizontal.description
         #expect(desc == "rightward" || desc == "leftward")
     }
 }
 
 @Suite
-struct `Horizontal - Operators` {
+struct `Horizontal negation exchanges cases and is involutive` {
     @Test(arguments: [Horizontal.rightward, Horizontal.leftward])
     func `negation operator is involution`(horizontal: Horizontal) {
         #expect(!(!horizontal) == horizontal)

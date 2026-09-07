@@ -4,14 +4,14 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Chirality - Value Typealias` {
+struct `Chirality values pair their case with a payload` {
 
     struct Payload: ~Copyable {
         let value: Int
     }
 
     @Test
-    func `Value typealias for Pair`() {
+    func `Chirality value aliases preserve both pair components`() {
         let paired: Chirality.Value<String> = Pair(.left, "hand")
         #expect(paired.first == .left)
         #expect(paired.second == "hand")

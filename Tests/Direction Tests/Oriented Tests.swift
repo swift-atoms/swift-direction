@@ -4,7 +4,7 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Oriented Tests` {
+struct `Oriented values preserve their orientation and payload` {
 
     @Test
     func `orientation Value pairs the orientation with its payload`() {

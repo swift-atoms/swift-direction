@@ -3,7 +3,7 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Temporal - Static Functions` {
+struct `Temporal opposition exchanges its two cases` {
     @Test(arguments: [Temporal.future, Temporal.past])
     func `opposite is involution`(temporal: Temporal) {
         #expect(Temporal.opposite(of: Temporal.opposite(of: temporal)) == temporal)
@@ -21,7 +21,7 @@ struct `Temporal - Static Functions` {
 }
 
 @Suite
-struct `Temporal - Properties` {
+struct `Temporal properties preserve case identity and directional meaning` {
     @Test(arguments: [Temporal.future, Temporal.past])
     func `opposite property delegates to static function`(temporal: Temporal) {
         #expect(temporal.opposite == Temporal.opposite(of: temporal))
@@ -38,19 +38,19 @@ struct `Temporal - Properties` {
     }
 
     @Test
-    func `isFuture property`() {
+    func `The future predicate identifies the future case`() {
         #expect(Temporal.future.isFuture)
         #expect(!Temporal.past.isFuture)
     }
 
     @Test
-    func `isPast property`() {
+    func `The past predicate identifies the past case`() {
         #expect(Temporal.past.isPast)
         #expect(!Temporal.future.isPast)
     }
 
     @Test(arguments: [Temporal.future, Temporal.past])
-    func `isPositive property`(temporal: Temporal) {
+    func `The positive predicate identifies positive Temporal values`(temporal: Temporal) {
         if temporal == .future {
             #expect(temporal.isPositive)
         } else {
@@ -59,7 +59,7 @@ struct `Temporal - Properties` {
     }
 
     @Test(arguments: [Temporal.future, Temporal.past])
-    func `isNegative property`(temporal: Temporal) {
+    func `The negative predicate identifies negative Temporal values`(temporal: Temporal) {
         if temporal == .past {
             #expect(temporal.isNegative)
         } else {
@@ -69,7 +69,7 @@ struct `Temporal - Properties` {
 }
 
 @Suite
-struct `Temporal - Initializers` {
+struct `Temporal construction maps directions and Boolean values to cases` {
     @Test
     func `init from positive direction creates future`() {
         #expect(Temporal(direction: .positive) == .future)
@@ -81,7 +81,7 @@ struct `Temporal - Initializers` {
     }
 
     @Test(arguments: [Temporal.future, Temporal.past])
-    func `direction roundtrip`(temporal: Temporal) {
+    func `Temporal values round trip through Direction`(temporal: Temporal) {
         #expect(Temporal(direction: temporal.direction) == temporal)
     }
 
@@ -97,7 +97,7 @@ struct `Temporal - Initializers` {
 }
 
 @Suite
-struct `Temporal - Protocol Conformances` {
+struct `Temporal cases support enumeration equality and hashing` {
     @Test
     func `allCases contains exactly two cases`() {
         #expect(Temporal.allCases.count == 2)
@@ -114,31 +114,31 @@ struct `Temporal - Protocol Conformances` {
     }
 
     @Test(arguments: [Temporal.future, Temporal.past])
-    func `Equatable reflexivity`(temporal: Temporal) {
+    func `Temporal equality is reflexive`(temporal: Temporal) {
         #expect(temporal == temporal)
     }
 
     @Test
-    func `Equatable symmetry`() {
+    func `Temporal inequality is symmetric for distinct cases`() {
         #expect(Temporal.future != Temporal.past)
         #expect(Temporal.past != Temporal.future)
     }
 
     @Test
-    func `Hashable produces unique hashes`() {
+    func `Sets distinguish the two Temporal cases`() {
         let set: Set<Temporal> = [.future, .past, .future]
         #expect(set.count == 2)
     }
 
     @Test(arguments: [Temporal.future, Temporal.past])
-    func `description property`(temporal: Temporal) {
+    func `Temporal descriptions name a valid case`(temporal: Temporal) {
         let desc = temporal.description
         #expect(desc == "future" || desc == "past")
     }
 }
 
 @Suite
-struct `Temporal - Operators` {
+struct `Temporal negation exchanges cases and is involutive` {
     @Test(arguments: [Temporal.future, Temporal.past])
     func `negation operator is involution`(temporal: Temporal) {
         #expect(!(!temporal) == temporal)

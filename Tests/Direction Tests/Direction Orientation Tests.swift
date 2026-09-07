@@ -3,7 +3,7 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Direction - Static Functions` {
+struct `Direction opposition exchanges its two cases` {
     @Test(arguments: [Direction.positive, Direction.negative])
     func `opposite is involution`(direction: Direction) {
         #expect(Direction.opposite(of: Direction.opposite(of: direction)) == direction)
@@ -21,7 +21,7 @@ struct `Direction - Static Functions` {
 }
 
 @Suite
-struct `Direction - Properties` {
+struct `Direction properties preserve case identity and directional meaning` {
     @Test(arguments: [Direction.positive, Direction.negative])
     func `opposite property delegates to static function`(direction: Direction) {
         #expect(direction.opposite == Direction.opposite(of: direction))
@@ -44,7 +44,7 @@ struct `Direction - Properties` {
     }
 
     @Test(arguments: [Direction.positive, Direction.negative])
-    func `isPositive property`(direction: Direction) {
+    func `The positive predicate identifies positive Direction values`(direction: Direction) {
         if direction == .positive {
             #expect(direction.isPositive)
         } else {
@@ -53,7 +53,7 @@ struct `Direction - Properties` {
     }
 
     @Test(arguments: [Direction.positive, Direction.negative])
-    func `isNegative property`(direction: Direction) {
+    func `The negative predicate identifies negative Direction values`(direction: Direction) {
         if direction == .negative {
             #expect(direction.isNegative)
         } else {
@@ -63,7 +63,7 @@ struct `Direction - Properties` {
 }
 
 @Suite
-struct `Direction - Operators` {
+struct `Direction negation exchanges cases and is involutive` {
     @Test(arguments: [Direction.positive, Direction.negative])
     func `negation operator is involution`(direction: Direction) {
         #expect(!(!direction) == direction)
@@ -81,7 +81,7 @@ struct `Direction - Operators` {
 }
 
 @Suite
-struct `Direction - Initializers` {
+struct `Direction construction maps directions and Boolean values to cases` {
     @Test(arguments: [Direction.positive, Direction.negative])
     func `init from direction is identity`(direction: Direction) {
         #expect(Direction(direction: direction) == direction)
@@ -112,7 +112,7 @@ struct `Direction - Initializers` {
 }
 
 @Suite
-struct `Direction - Protocol Conformances` {
+struct `Direction cases support enumeration equality and hashing` {
     @Test
     func `allCases contains exactly two cases`() {
         #expect(Direction.allCases.count == 2)
@@ -129,18 +129,18 @@ struct `Direction - Protocol Conformances` {
     }
 
     @Test(arguments: [Direction.positive, Direction.negative])
-    func `Equatable reflexivity`(direction: Direction) {
+    func `Direction equality is reflexive`(direction: Direction) {
         #expect(direction == direction)
     }
 
     @Test
-    func `Equatable symmetry`() {
+    func `Direction inequality is symmetric for distinct cases`() {
         #expect(Direction.positive != Direction.negative)
         #expect(Direction.negative != Direction.positive)
     }
 
     @Test
-    func `Hashable produces unique hashes`() {
+    func `Sets distinguish the two Direction cases`() {
         let set: Set<Direction> = [.positive, .negative, .positive]
         #expect(set.count == 2)
     }

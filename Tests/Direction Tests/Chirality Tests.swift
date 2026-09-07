@@ -3,7 +3,7 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Chirality - Static Functions` {
+struct `Chirality opposition exchanges its two cases` {
     @Test(arguments: [Chirality.left, Chirality.right])
     func `opposite is involution`(chirality: Chirality) {
         #expect(Chirality.opposite(of: Chirality.opposite(of: chirality)) == chirality)
@@ -21,7 +21,7 @@ struct `Chirality - Static Functions` {
 }
 
 @Suite
-struct `Chirality - Properties` {
+struct `Chirality properties preserve case identity and directional meaning` {
     @Test(arguments: [Chirality.left, Chirality.right])
     func `opposite property delegates to static function`(chirality: Chirality) {
         #expect(chirality.opposite == Chirality.opposite(of: chirality))
@@ -33,18 +33,18 @@ struct `Chirality - Properties` {
     }
 
     @Test
-    func `standard coordinate system`() {
+    func `Standard chirality uses the right handed coordinate system`() {
         #expect(Chirality.standard == .right)
     }
 
     @Test
-    func `DirectX coordinate system`() {
+    func `DirectX chirality uses the left handed coordinate system`() {
         #expect(Chirality.directX == .left)
     }
 }
 
 @Suite
-struct `Chirality - Operators` {
+struct `Chirality negation exchanges cases and is involutive` {
     @Test(arguments: [Chirality.left, Chirality.right])
     func `negation operator is involution`(chirality: Chirality) {
         #expect(!(!chirality) == chirality)
@@ -62,7 +62,7 @@ struct `Chirality - Operators` {
 }
 
 @Suite
-struct `Chirality - Protocol Conformances` {
+struct `Chirality cases support enumeration equality and hashing` {
     @Test
     func `allCases contains exactly two cases`() {
         #expect(Chirality.allCases.count == 2)
@@ -79,18 +79,18 @@ struct `Chirality - Protocol Conformances` {
     }
 
     @Test(arguments: [Chirality.left, Chirality.right])
-    func `Equatable reflexivity`(chirality: Chirality) {
+    func `Chirality equality is reflexive`(chirality: Chirality) {
         #expect(chirality == chirality)
     }
 
     @Test
-    func `Equatable symmetry`() {
+    func `Chirality inequality is symmetric for distinct cases`() {
         #expect(Chirality.left != Chirality.right)
         #expect(Chirality.right != Chirality.left)
     }
 
     @Test
-    func `Hashable produces unique hashes`() {
+    func `Sets distinguish the two Chirality cases`() {
         let set: Set<Chirality> = [.left, .right, .left]
         #expect(set.count == 2)
     }

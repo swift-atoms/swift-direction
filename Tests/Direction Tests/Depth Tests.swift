@@ -3,7 +3,7 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Depth Tests` {
+struct `Depth preserves intrinsic opposition predicates and conformances` {
 
     @Test(arguments: [Depth.forward, Depth.backward])
     func `opposite is intrinsic and involutive`(_ value: Depth) {

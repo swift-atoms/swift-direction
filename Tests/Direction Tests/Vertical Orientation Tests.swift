@@ -3,7 +3,7 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Vertical - Static Functions` {
+struct `Vertical opposition exchanges its two cases` {
     @Test(arguments: [Vertical.upward, Vertical.downward])
     func `opposite is involution`(vertical: Vertical) {
         #expect(Vertical.opposite(of: Vertical.opposite(of: vertical)) == vertical)
@@ -21,7 +21,7 @@ struct `Vertical - Static Functions` {
 }
 
 @Suite
-struct `Vertical - Properties` {
+struct `Vertical properties preserve case identity and directional meaning` {
     @Test(arguments: [Vertical.upward, Vertical.downward])
     func `opposite property delegates to static function`(vertical: Vertical) {
         #expect(vertical.opposite == Vertical.opposite(of: vertical))
@@ -38,19 +38,19 @@ struct `Vertical - Properties` {
     }
 
     @Test
-    func `isUpward property`() {
+    func `The upward predicate identifies the upward case`() {
         #expect(Vertical.upward.isUpward)
         #expect(!Vertical.downward.isUpward)
     }
 
     @Test
-    func `isDownward property`() {
+    func `The downward predicate identifies the downward case`() {
         #expect(Vertical.downward.isDownward)
         #expect(!Vertical.upward.isDownward)
     }
 
     @Test(arguments: [Vertical.upward, Vertical.downward])
-    func `isPositive property`(vertical: Vertical) {
+    func `The positive predicate identifies positive Vertical values`(vertical: Vertical) {
         if vertical == .upward {
             #expect(vertical.isPositive)
         } else {
@@ -59,7 +59,7 @@ struct `Vertical - Properties` {
     }
 
     @Test(arguments: [Vertical.upward, Vertical.downward])
-    func `isNegative property`(vertical: Vertical) {
+    func `The negative predicate identifies negative Vertical values`(vertical: Vertical) {
         if vertical == .downward {
             #expect(vertical.isNegative)
         } else {
@@ -69,7 +69,7 @@ struct `Vertical - Properties` {
 }
 
 @Suite
-struct `Vertical - Initializers` {
+struct `Vertical construction maps directions and Boolean values to cases` {
     @Test
     func `init from positive direction creates upward`() {
         #expect(Vertical(direction: .positive) == .upward)
@@ -81,7 +81,7 @@ struct `Vertical - Initializers` {
     }
 
     @Test(arguments: [Vertical.upward, Vertical.downward])
-    func `direction roundtrip`(vertical: Vertical) {
+    func `Vertical values round trip through Direction`(vertical: Vertical) {
         #expect(Vertical(direction: vertical.direction) == vertical)
     }
 
@@ -97,7 +97,7 @@ struct `Vertical - Initializers` {
 }
 
 @Suite
-struct `Vertical - Protocol Conformances` {
+struct `Vertical cases support enumeration equality and hashing` {
     @Test
     func `allCases contains exactly two cases`() {
         #expect(Vertical.allCases.count == 2)
@@ -114,31 +114,31 @@ struct `Vertical - Protocol Conformances` {
     }
 
     @Test(arguments: [Vertical.upward, Vertical.downward])
-    func `Equatable reflexivity`(vertical: Vertical) {
+    func `Vertical equality is reflexive`(vertical: Vertical) {
         #expect(vertical == vertical)
     }
 
     @Test
-    func `Equatable symmetry`() {
+    func `Vertical inequality is symmetric for distinct cases`() {
         #expect(Vertical.upward != Vertical.downward)
         #expect(Vertical.downward != Vertical.upward)
     }
 
     @Test
-    func `Hashable produces unique hashes`() {
+    func `Sets distinguish the two Vertical cases`() {
         let set: Set<Vertical> = [.upward, .downward, .upward]
         #expect(set.count == 2)
     }
 
     @Test(arguments: [Vertical.upward, Vertical.downward])
-    func `description property`(vertical: Vertical) {
+    func `Vertical descriptions name a valid case`(vertical: Vertical) {
         let desc = vertical.description
         #expect(desc == "upward" || desc == "downward")
     }
 }
 
 @Suite
-struct `Vertical - Operators` {
+struct `Vertical negation exchanges cases and is involutive` {
     @Test(arguments: [Vertical.upward, Vertical.downward])
     func `negation operator is involution`(vertical: Vertical) {
         #expect(!(!vertical) == vertical)

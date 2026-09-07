@@ -2,7 +2,7 @@ import Direction
 import Testing
 
 @Suite
-struct `Direction Tests` {
+struct `Directions preserve opposition and sign based construction` {
     @Test(arguments: [Direction.positive, Direction.negative])
     func `opposite is involutive`(_ direction: Direction) {
         #expect(direction.opposite.opposite == direction)

@@ -3,7 +3,7 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Depth - Static Functions` {
+struct `Depth opposition exchanges its two cases` {
     @Test(arguments: [Depth.forward, Depth.backward])
     func `opposite is involution`(depth: Depth) {
         #expect(Depth.opposite(of: Depth.opposite(of: depth)) == depth)
@@ -21,7 +21,7 @@ struct `Depth - Static Functions` {
 }
 
 @Suite
-struct `Depth - Properties` {
+struct `Depth properties preserve case identity and directional meaning` {
     @Test(arguments: [Depth.forward, Depth.backward])
     func `opposite property delegates to static function`(depth: Depth) {
         #expect(depth.opposite == Depth.opposite(of: depth))
@@ -38,19 +38,19 @@ struct `Depth - Properties` {
     }
 
     @Test
-    func `isForward property`() {
+    func `The forward predicate identifies the forward case`() {
         #expect(Depth.forward.isForward)
         #expect(!Depth.backward.isForward)
     }
 
     @Test
-    func `isBackward property`() {
+    func `The backward predicate identifies the backward case`() {
         #expect(Depth.backward.isBackward)
         #expect(!Depth.forward.isBackward)
     }
 
     @Test(arguments: [Depth.forward, Depth.backward])
-    func `isPositive property`(depth: Depth) {
+    func `The positive predicate identifies positive Depth values`(depth: Depth) {
         if depth == .forward {
             #expect(depth.isPositive)
         } else {
@@ -59,7 +59,7 @@ struct `Depth - Properties` {
     }
 
     @Test(arguments: [Depth.forward, Depth.backward])
-    func `isNegative property`(depth: Depth) {
+    func `The negative predicate identifies negative Depth values`(depth: Depth) {
         if depth == .backward {
             #expect(depth.isNegative)
         } else {
@@ -69,7 +69,7 @@ struct `Depth - Properties` {
 }
 
 @Suite
-struct `Depth - Initializers` {
+struct `Depth construction maps directions and Boolean values to cases` {
     @Test
     func `init from positive direction creates forward`() {
         #expect(Depth(direction: .positive) == .forward)
@@ -81,7 +81,7 @@ struct `Depth - Initializers` {
     }
 
     @Test(arguments: [Depth.forward, Depth.backward])
-    func `direction roundtrip`(depth: Depth) {
+    func `Depth values round trip through Direction`(depth: Depth) {
         #expect(Depth(direction: depth.direction) == depth)
     }
 
@@ -97,7 +97,7 @@ struct `Depth - Initializers` {
 }
 
 @Suite
-struct `Depth - Protocol Conformances` {
+struct `Depth cases support enumeration equality and hashing` {
     @Test
     func `allCases contains exactly two cases`() {
         #expect(Depth.allCases.count == 2)
@@ -114,31 +114,31 @@ struct `Depth - Protocol Conformances` {
     }
 
     @Test(arguments: [Depth.forward, Depth.backward])
-    func `Equatable reflexivity`(depth: Depth) {
+    func `Depth equality is reflexive`(depth: Depth) {
         #expect(depth == depth)
     }
 
     @Test
-    func `Equatable symmetry`() {
+    func `Depth inequality is symmetric for distinct cases`() {
         #expect(Depth.forward != Depth.backward)
         #expect(Depth.backward != Depth.forward)
     }
 
     @Test
-    func `Hashable produces unique hashes`() {
+    func `Sets distinguish the two Depth cases`() {
         let set: Set<Depth> = [.forward, .backward, .forward]
         #expect(set.count == 2)
     }
 
     @Test(arguments: [Depth.forward, Depth.backward])
-    func `description property`(depth: Depth) {
+    func `Depth descriptions name a valid case`(depth: Depth) {
         let desc = depth.description
         #expect(desc == "forward" || desc == "backward")
     }
 }
 
 @Suite
-struct `Depth - Operators` {
+struct `Depth negation exchanges cases and is involutive` {
     @Test(arguments: [Depth.forward, Depth.backward])
     func `negation operator is involution`(depth: Depth) {
         #expect(!(!depth) == depth)

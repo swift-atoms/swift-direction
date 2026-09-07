@@ -4,9 +4,9 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Winding - Value Typealias` {
+struct `Winding values pair their case with a payload` {
     @Test
-    func `Value typealias for Pair`() {
+    func `Winding value aliases preserve both pair components`() {
         let paired: Winding.Value<Double> = Pair(.clockwise, 3.14)
         #expect(paired.first == .clockwise)
         #expect(paired.second == 3.14)

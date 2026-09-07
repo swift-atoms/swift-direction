@@ -3,7 +3,7 @@ import Testing
 @testable import Direction
 
 @Suite
-struct `Temporal Tests` {
+struct `Temporal preserves intrinsic opposition predicates and conformances` {
 
     @Test(arguments: [Temporal.future, Temporal.past])
     func `opposite is intrinsic and involutive`(_ value: Temporal) {
