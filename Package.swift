@@ -17,6 +17,9 @@ let package = Package(
         .library(name: "Direction Test Support", targets: ["Direction Test Support"]),
     ],
     dependencies: [
+
+        .package(url: "https://github.com/swift-atoms/swift-equation.git", branch: "main"),
+
         .package(
             url: "https://github.com/swift-atoms/swift-hash.git",
             branch: "main"
@@ -64,6 +67,33 @@ let package = Package(
                 .target(name: "Direction Foundation Integration"),
             ],
             path: "Tests/Direction Tests"
+        ),
+        .testTarget(
+            name: "Consolidated Direction Comparison Tests",
+            dependencies: [
+
+                .target(name: "Direction"),
+                .product(name: "Comparison", package: "swift-comparison"),
+            ],
+            path: "Tests/Consolidated swift-direction-comparison"
+        ),
+        .testTarget(
+            name: "Consolidated Direction Equation Tests",
+            dependencies: [
+
+                .target(name: "Direction"),
+                .product(name: "Equation", package: "swift-equation"),
+            ],
+            path: "Tests/Consolidated swift-direction-equation"
+        ),
+        .testTarget(
+            name: "Consolidated Direction Hash Tests",
+            dependencies: [
+
+                .target(name: "Direction"),
+                .product(name: "Hash", package: "swift-hash"),
+            ],
+            path: "Tests/Consolidated swift-direction-hash"
         ),
     ],
     swiftLanguageModes: [.v6]
