@@ -1,1 +1,1 @@
-extension Direction::Direction: Swift.Comparable {}
+extension Direction::Direction: Swift::Comparable {}

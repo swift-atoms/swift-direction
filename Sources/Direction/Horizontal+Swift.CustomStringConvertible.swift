@@ -1,4 +1,4 @@
-extension Horizontal: Swift.CustomStringConvertible {
+extension Horizontal: Swift::CustomStringConvertible {
 
     public var description: String {
         switch self {

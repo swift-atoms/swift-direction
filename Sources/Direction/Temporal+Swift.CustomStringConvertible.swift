@@ -1,4 +1,4 @@
-extension Temporal: Swift.CustomStringConvertible {
+extension Temporal: Swift::CustomStringConvertible {
 
     public var description: String {
         switch self {

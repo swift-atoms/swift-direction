@@ -1,4 +1,4 @@
-extension Direction: Swift.CaseIterable {
+extension Direction: Swift::CaseIterable {
 
     public static var allCases: [Direction] { [.positive, .negative] }
 }

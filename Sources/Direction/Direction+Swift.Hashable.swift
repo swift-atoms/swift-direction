@@ -1,1 +1,1 @@
-extension Direction::Direction: Swift.Hashable {}
+extension Direction::Direction: Swift::Hashable {}

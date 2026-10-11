@@ -34,5 +34,5 @@ extension Temporal {
 }
 
 #if !hasFeature(Embedded)
-extension Temporal: Swift.Codable {}
+extension Temporal: Swift::Codable {}
 #endif

@@ -71,5 +71,5 @@ extension Direction {
 }
 
 #if !hasFeature(Embedded)
-extension Direction: Swift.Codable {}
+extension Direction: Swift::Codable {}
 #endif

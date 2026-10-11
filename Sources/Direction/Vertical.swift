@@ -34,5 +34,5 @@ extension Vertical {
 }
 
 #if !hasFeature(Embedded)
-extension Vertical: Swift.Codable {}
+extension Vertical: Swift::Codable {}
 #endif

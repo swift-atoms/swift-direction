@@ -1,4 +1,4 @@
-extension Depth: Swift.CustomStringConvertible {
+extension Depth: Swift::CustomStringConvertible {
 
     public var description: String {
         switch self {
