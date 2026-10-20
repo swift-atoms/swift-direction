@@ -34,5 +34,5 @@ extension Depth {
 }
 
 #if !hasFeature(Embedded)
-extension Depth: Swift::Codable {}
+    extension Depth: Swift::Codable {}
 #endif

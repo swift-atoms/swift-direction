@@ -34,5 +34,5 @@ extension Horizontal {
 }
 
 #if !hasFeature(Embedded)
-extension Horizontal: Swift::Codable {}
+    extension Horizontal: Swift::Codable {}
 #endif
