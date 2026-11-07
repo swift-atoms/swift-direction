@@ -3,14 +3,18 @@ import Testing
 
 @testable import Direction
 
-@Suite
-struct `Oriented values preserve their orientation and payload` {
+enum `Oriented Tests` {}
 
-    @Test
-    func `orientation Value pairs the orientation with its payload`() {
-        let value: Vertical.Value<Double> = Pair(.upward, 1.5)
+extension `Oriented Tests` {
+    @Suite
+    struct `Oriented values preserve their orientation and payload` {
 
-        #expect(value.first == .upward)
-        #expect(value.second == 1.5)
+        @Test
+        func `orientation Value pairs the orientation with its payload`() {
+            let value: Vertical.Value<Double> = Pair(.upward, 1.5)
+
+            #expect(value.first == .upward)
+            #expect(value.second == 1.5)
+        }
     }
 }

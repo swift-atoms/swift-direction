@@ -2,27 +2,31 @@ import Testing
 
 @testable import Direction
 
-@Suite
-struct `Vertical preserves intrinsic opposition predicates and conformances` {
+enum `Vertical Tests` {}
 
-    @Test(arguments: [Vertical.upward, Vertical.downward])
-    func `opposite is intrinsic and involutive`(_ value: Vertical) {
-        #expect(value.opposite == Vertical.opposite(of: value))
-        #expect(value.opposite.opposite == value)
-    }
+extension `Vertical Tests` {
+    @Suite
+    struct `Vertical preserves intrinsic opposition predicates and conformances` {
 
-    @Test
-    func `directional predicates describe cases`() {
-        #expect(Vertical.upward.isUpward)
-        #expect(!Vertical.upward.isDownward)
-        #expect(Vertical.downward.isDownward)
-        #expect(!Vertical.downward.isUpward)
-    }
+        @Test(arguments: [Vertical.upward, Vertical.downward])
+        func `opposite is intrinsic and involutive`(_ value: Vertical) {
+            #expect(value.opposite == Vertical.opposite(of: value))
+            #expect(value.opposite.opposite == value)
+        }
 
-    @Test
-    func `intrinsic conformances remain available`() {
-        #expect(Vertical.allCases == [.upward, .downward])
-        #expect(Vertical.upward.description == "upward")
-        #expect(Vertical.downward.description == "downward")
+        @Test
+        func `directional predicates describe cases`() {
+            #expect(Vertical.upward.isUpward)
+            #expect(!Vertical.upward.isDownward)
+            #expect(Vertical.downward.isDownward)
+            #expect(!Vertical.downward.isUpward)
+        }
+
+        @Test
+        func `intrinsic conformances remain available`() {
+            #expect(Vertical.allCases == [.upward, .downward])
+            #expect(Vertical.upward.description == "upward")
+            #expect(Vertical.downward.description == "downward")
+        }
     }
 }

@@ -2,27 +2,31 @@ import Testing
 
 @testable import Direction
 
-@Suite
-struct `Depth preserves intrinsic opposition predicates and conformances` {
+enum `Depth Tests` {}
 
-    @Test(arguments: [Depth.forward, Depth.backward])
-    func `opposite is intrinsic and involutive`(_ value: Depth) {
-        #expect(value.opposite == Depth.opposite(of: value))
-        #expect(value.opposite.opposite == value)
-    }
+extension `Depth Tests` {
+    @Suite
+    struct `Depth preserves intrinsic opposition predicates and conformances` {
 
-    @Test
-    func `directional predicates describe cases`() {
-        #expect(Depth.forward.isForward)
-        #expect(!Depth.forward.isBackward)
-        #expect(Depth.backward.isBackward)
-        #expect(!Depth.backward.isForward)
-    }
+        @Test(arguments: [Depth.forward, Depth.backward])
+        func `opposite is intrinsic and involutive`(_ value: Depth) {
+            #expect(value.opposite == Depth.opposite(of: value))
+            #expect(value.opposite.opposite == value)
+        }
 
-    @Test
-    func `intrinsic conformances remain available`() {
-        #expect(Depth.allCases == [.forward, .backward])
-        #expect(Depth.forward.description == "forward")
-        #expect(Depth.backward.description == "backward")
+        @Test
+        func `directional predicates describe cases`() {
+            #expect(Depth.forward.isForward)
+            #expect(!Depth.forward.isBackward)
+            #expect(Depth.backward.isBackward)
+            #expect(!Depth.backward.isForward)
+        }
+
+        @Test
+        func `intrinsic conformances remain available`() {
+            #expect(Depth.allCases == [.forward, .backward])
+            #expect(Depth.forward.description == "forward")
+            #expect(Depth.backward.description == "backward")
+        }
     }
 }

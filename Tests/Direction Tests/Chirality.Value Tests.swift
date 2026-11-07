@@ -3,34 +3,38 @@ import Testing
 
 @testable import Direction
 
-@Suite
-struct `Chirality values pair their case with a payload` {
+enum `Chirality.Value Tests` {}
 
-    struct Payload: ~Copyable {
-        let value: Int
-    }
+extension `Chirality.Value Tests` {
+    @Suite
+    struct `Chirality values pair their case with a payload` {
 
-    @Test
-    func `Chirality value aliases preserve both pair components`() {
-        let paired: Chirality.Value<String> = Pair(.left, "hand")
-        #expect(paired.first == .left)
-        #expect(paired.second == "hand")
-    }
-
-    @Test
-    func `Value is Pair type`() {
-        let value: Chirality.Value<Int> = Pair(.right, 42)
-        #expect(value.first == .right)
-        #expect(value.second == 42)
-    }
-
-    @Test
-    func `Value accepts noncopyable payloads`() {
-        let value: Chirality.Value<Payload> = Pair(.right, Payload(value: 42))
-        let matches = value.apply { chirality, payload in
-            chirality == .right && payload.value == 42
+        struct Payload: ~Copyable {
+            let value: Int
         }
 
-        #expect(matches)
+        @Test
+        func `Chirality value aliases preserve both pair components`() {
+            let paired: Chirality.Value<String> = Pair(.left, "hand")
+            #expect(paired.first == .left)
+            #expect(paired.second == "hand")
+        }
+
+        @Test
+        func `Value is Pair type`() {
+            let value: Chirality.Value<Int> = Pair(.right, 42)
+            #expect(value.first == .right)
+            #expect(value.second == 42)
+        }
+
+        @Test
+        func `Value accepts noncopyable payloads`() {
+            let value: Chirality.Value<Payload> = Pair(.right, Payload(value: 42))
+            let matches = value.apply { chirality, payload in
+                chirality == .right && payload.value == 42
+            }
+
+            #expect(matches)
+        }
     }
 }

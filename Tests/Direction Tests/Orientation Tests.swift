@@ -2,136 +2,140 @@ import Testing
 
 @testable import Direction
 
-@Suite
-struct `Orientations preserve opposition and conversions through Direction` {
+enum `Orientation Tests` {}
 
-    @Test
-    func `All orientation types conform to Orientation`() {
-        func checkOrientation<T: Orientation>(_: T.Type) {
-            #expect(T.allCases.count == 2)
+extension `Orientation Tests` {
+    @Suite
+    struct `Orientations preserve opposition and conversions through Direction` {
+
+        @Test
+        func `All orientation types conform to Orientation`() {
+            func checkOrientation<T: Orientation>(_: T.Type) {
+                #expect(T.allCases.count == 2)
+            }
+
+            checkOrientation(Direction.self)
+            checkOrientation(Horizontal.self)
+            checkOrientation(Vertical.self)
+            checkOrientation(Depth.self)
+            checkOrientation(Temporal.self)
         }
 
-        checkOrientation(Direction.self)
-        checkOrientation(Horizontal.self)
-        checkOrientation(Vertical.self)
-        checkOrientation(Depth.self)
-        checkOrientation(Temporal.self)
-    }
+        @Test
+        func `Opposite is an involution`() {
+            func checkInvolution<T: Orientation>(_ value: T) {
+                #expect(value.opposite.opposite == value)
+                #expect(!(!value) == value)
+            }
 
-    @Test
-    func `Opposite is an involution`() {
-        func checkInvolution<T: Orientation>(_ value: T) {
-            #expect(value.opposite.opposite == value)
-            #expect(!(!value) == value)
+            checkInvolution(Direction.positive)
+            checkInvolution(Direction.negative)
+            checkInvolution(Horizontal.rightward)
+            checkInvolution(Horizontal.leftward)
+            checkInvolution(Vertical.upward)
+            checkInvolution(Vertical.downward)
+            checkInvolution(Depth.forward)
+            checkInvolution(Depth.backward)
+            checkInvolution(Temporal.future)
+            checkInvolution(Temporal.past)
         }
 
-        checkInvolution(Direction.positive)
-        checkInvolution(Direction.negative)
-        checkInvolution(Horizontal.rightward)
-        checkInvolution(Horizontal.leftward)
-        checkInvolution(Vertical.upward)
-        checkInvolution(Vertical.downward)
-        checkInvolution(Depth.forward)
-        checkInvolution(Depth.backward)
-        checkInvolution(Temporal.future)
-        checkInvolution(Temporal.past)
-    }
+        @Test
+        func `All orientations are isomorphic to Direction`() {
 
-    @Test
-    func `All orientations are isomorphic to Direction`() {
+            #expect(Horizontal(direction: .positive) == .rightward)
+            #expect(Vertical(direction: .positive) == .upward)
+            #expect(Depth(direction: .positive) == .forward)
+            #expect(Temporal(direction: .positive) == .future)
 
-        #expect(Horizontal(direction: .positive) == .rightward)
-        #expect(Vertical(direction: .positive) == .upward)
-        #expect(Depth(direction: .positive) == .forward)
-        #expect(Temporal(direction: .positive) == .future)
-
-        #expect(Horizontal(direction: .negative) == .leftward)
-        #expect(Vertical(direction: .negative) == .downward)
-        #expect(Depth(direction: .negative) == .backward)
-        #expect(Temporal(direction: .negative) == .past)
-    }
-
-    @Test
-    func `Direction property recovers the underlying direction`() {
-        #expect(Horizontal.rightward.direction == .positive)
-        #expect(Horizontal.leftward.direction == .negative)
-        #expect(Vertical.upward.direction == .positive)
-        #expect(Vertical.downward.direction == .negative)
-        #expect(Depth.forward.direction == .positive)
-        #expect(Depth.backward.direction == .negative)
-        #expect(Temporal.future.direction == .positive)
-        #expect(Temporal.past.direction == .negative)
-    }
-
-    @Test
-    func `Round-trip through Direction preserves value`() {
-        func checkRoundTrip<T: Orientation>(_ value: T) {
-            let dir = value.direction
-            let back = T(direction: dir)
-            #expect(back == value)
+            #expect(Horizontal(direction: .negative) == .leftward)
+            #expect(Vertical(direction: .negative) == .downward)
+            #expect(Depth(direction: .negative) == .backward)
+            #expect(Temporal(direction: .negative) == .past)
         }
 
-        checkRoundTrip(Horizontal.rightward)
-        checkRoundTrip(Horizontal.leftward)
-        checkRoundTrip(Vertical.upward)
-        checkRoundTrip(Vertical.downward)
-        checkRoundTrip(Depth.forward)
-        checkRoundTrip(Depth.backward)
-        checkRoundTrip(Temporal.future)
-        checkRoundTrip(Temporal.past)
-    }
-
-    @Test
-    func `Boolean construction selects the corresponding orientation case`() {
-        #expect(Direction(true) == .positive)
-        #expect(Direction(false) == .negative)
-        #expect(Horizontal(true) == .rightward)
-        #expect(Horizontal(false) == .leftward)
-    }
-
-    @Test
-    func `Orientation sign predicates distinguish positive and negative cases`() {
-        #expect(Direction.positive.isPositive)
-        #expect(!Direction.positive.isNegative)
-        #expect(Direction.negative.isNegative)
-        #expect(!Direction.negative.isPositive)
-
-        #expect(Horizontal.rightward.isPositive)
-        #expect(Horizontal.leftward.isNegative)
-    }
-
-    @Test
-    func `Generic function works on any Orientation`() {
-        func flip<T: Orientation>(_ orientation: T) -> T {
-            !orientation
+        @Test
+        func `Direction property recovers the underlying direction`() {
+            #expect(Horizontal.rightward.direction == .positive)
+            #expect(Horizontal.leftward.direction == .negative)
+            #expect(Vertical.upward.direction == .positive)
+            #expect(Vertical.downward.direction == .negative)
+            #expect(Depth.forward.direction == .positive)
+            #expect(Depth.backward.direction == .negative)
+            #expect(Temporal.future.direction == .positive)
+            #expect(Temporal.past.direction == .negative)
         }
 
-        #expect(flip(Direction.positive) == .negative)
-        #expect(flip(Horizontal.rightward) == .leftward)
-        #expect(flip(Vertical.upward) == .downward)
-        #expect(flip(Depth.forward) == .backward)
-        #expect(flip(Temporal.future) == .past)
-    }
+        @Test
+        func `Round-trip through Direction preserves value`() {
+            func checkRoundTrip<T: Orientation>(_ value: T) {
+                let dir = value.direction
+                let back = T(direction: dir)
+                #expect(back == value)
+            }
 
-    @Test
-    func `Conversion through Direction preserves orientation across types`() {
-        func convert<From: Orientation, To: Orientation>(
-            _ from: From,
-            to _: To.Type
-        ) -> To {
-            To(direction: from.direction)
+            checkRoundTrip(Horizontal.rightward)
+            checkRoundTrip(Horizontal.leftward)
+            checkRoundTrip(Vertical.upward)
+            checkRoundTrip(Vertical.downward)
+            checkRoundTrip(Depth.forward)
+            checkRoundTrip(Depth.backward)
+            checkRoundTrip(Temporal.future)
+            checkRoundTrip(Temporal.past)
         }
 
-        let horizontal: Horizontal = .rightward
-        let vertical: Vertical = convert(horizontal, to: Vertical.self)
-        #expect(vertical == .upward)
+        @Test
+        func `Boolean construction selects the corresponding orientation case`() {
+            #expect(Direction(true) == .positive)
+            #expect(Direction(false) == .negative)
+            #expect(Horizontal(true) == .rightward)
+            #expect(Horizontal(false) == .leftward)
+        }
 
-        let depth: Depth = convert(vertical, to: Depth.self)
-        #expect(depth == .forward)
+        @Test
+        func `Orientation sign predicates distinguish positive and negative cases`() {
+            #expect(Direction.positive.isPositive)
+            #expect(!Direction.positive.isNegative)
+            #expect(Direction.negative.isNegative)
+            #expect(!Direction.negative.isPositive)
+
+            #expect(Horizontal.rightward.isPositive)
+            #expect(Horizontal.leftward.isNegative)
+        }
+
+        @Test
+        func `Generic function works on any Orientation`() {
+            func flip<T: Orientation>(_ orientation: T) -> T {
+                !orientation
+            }
+
+            #expect(flip(Direction.positive) == .negative)
+            #expect(flip(Horizontal.rightward) == .leftward)
+            #expect(flip(Vertical.upward) == .downward)
+            #expect(flip(Depth.forward) == .backward)
+            #expect(flip(Temporal.future) == .past)
+        }
+
+        @Test
+        func `Conversion through Direction preserves orientation across types`() {
+            func convert<From: Orientation, To: Orientation>(
+                _ from: From,
+                to _: To.Type
+            ) -> To {
+                To(direction: from.direction)
+            }
+
+            let horizontal: Horizontal = .rightward
+            let vertical: Vertical = convert(horizontal, to: Vertical.self)
+            #expect(vertical == .upward)
+
+            let depth: Depth = convert(vertical, to: Depth.self)
+            #expect(depth == .forward)
+        }
     }
 }
 
-extension `Orientations preserve opposition and conversions through Direction` {
+extension `Orientation Tests`.`Orientations preserve opposition and conversions through Direction` {
     @Suite
     struct `Orientation wrappers preserve Direction identity and composition` {
         @Test

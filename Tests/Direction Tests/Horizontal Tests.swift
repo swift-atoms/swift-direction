@@ -2,27 +2,31 @@ import Testing
 
 @testable import Direction
 
-@Suite
-struct `Horizontal preserves intrinsic opposition predicates and conformances` {
+enum `Horizontal Tests` {}
 
-    @Test(arguments: [Horizontal.rightward, Horizontal.leftward])
-    func `opposite is intrinsic and involutive`(_ value: Horizontal) {
-        #expect(value.opposite == Horizontal.opposite(of: value))
-        #expect(value.opposite.opposite == value)
-    }
+extension `Horizontal Tests` {
+    @Suite
+    struct `Horizontal preserves intrinsic opposition predicates and conformances` {
 
-    @Test
-    func `directional predicates describe cases`() {
-        #expect(Horizontal.rightward.isRightward)
-        #expect(!Horizontal.rightward.isLeftward)
-        #expect(Horizontal.leftward.isLeftward)
-        #expect(!Horizontal.leftward.isRightward)
-    }
+        @Test(arguments: [Horizontal.rightward, Horizontal.leftward])
+        func `opposite is intrinsic and involutive`(_ value: Horizontal) {
+            #expect(value.opposite == Horizontal.opposite(of: value))
+            #expect(value.opposite.opposite == value)
+        }
 
-    @Test
-    func `intrinsic conformances remain available`() {
-        #expect(Horizontal.allCases == [.rightward, .leftward])
-        #expect(Horizontal.rightward.description == "rightward")
-        #expect(Horizontal.leftward.description == "leftward")
+        @Test
+        func `directional predicates describe cases`() {
+            #expect(Horizontal.rightward.isRightward)
+            #expect(!Horizontal.rightward.isLeftward)
+            #expect(Horizontal.leftward.isLeftward)
+            #expect(!Horizontal.leftward.isRightward)
+        }
+
+        @Test
+        func `intrinsic conformances remain available`() {
+            #expect(Horizontal.allCases == [.rightward, .leftward])
+            #expect(Horizontal.rightward.description == "rightward")
+            #expect(Horizontal.leftward.description == "leftward")
+        }
     }
 }
