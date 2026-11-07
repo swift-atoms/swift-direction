@@ -73,3 +73,12 @@ extension Direction {
 #if !hasFeature(Embedded)
     extension Direction: Swift::Codable {}
 #endif
+
+extension Direction: Swift::CaseIterable {
+
+    public static var allCases: [Direction] { [.positive, .negative] }
+}
+
+extension Direction::Direction: Swift::Comparable {}
+
+extension Direction::Direction: Swift::Hashable {}

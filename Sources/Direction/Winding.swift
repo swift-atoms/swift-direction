@@ -1,3 +1,5 @@
+public import Pair
+
 public enum Winding: Sendable, Hashable, CaseIterable {
 
     case clockwise
@@ -39,3 +41,8 @@ extension Winding {
 #if !hasFeature(Embedded)
     extension Winding: Swift::Codable {}
 #endif
+
+extension Winding {
+
+    public typealias Value<Payload: ~Copyable & ~Escapable> = Pair<Winding, Payload>
+}

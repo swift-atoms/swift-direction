@@ -1,3 +1,5 @@
+public import Pair
+
 public protocol Orientation: Sendable, Hashable, CaseIterable where AllCases == [Self] {
 
     var opposite: Self { get }
@@ -36,4 +38,14 @@ extension Orientation {
     public var isNegative: Bool {
         direction == Direction.negative
     }
+}
+
+public typealias Oriented<
+    O: Orientation,
+    Scalar: ~Copyable & ~Escapable
+> = Pair<O, Scalar>
+
+extension Orientation {
+
+    public typealias Value<Scalar: ~Copyable & ~Escapable> = Oriented<Self, Scalar>
 }

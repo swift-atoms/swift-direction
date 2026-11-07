@@ -1,3 +1,5 @@
+public import Pair
+
 public enum Chirality: Sendable, Hashable, CaseIterable {
 
     case left
@@ -42,3 +44,8 @@ extension Chirality {
 #if !hasFeature(Embedded)
     extension Chirality: Swift::Codable {}
 #endif
+
+extension Chirality {
+
+    public typealias Value<Payload: ~Copyable & ~Escapable> = Pair<Chirality, Payload>
+}

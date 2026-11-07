@@ -36,3 +36,13 @@ extension Depth {
 #if !hasFeature(Embedded)
     extension Depth: Swift::Codable {}
 #endif
+
+extension Depth: Swift::CustomStringConvertible {
+
+    public var description: String {
+        switch self {
+        case .forward: return "forward"
+        case .backward: return "backward"
+        }
+    }
+}

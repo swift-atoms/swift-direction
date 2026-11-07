@@ -36,3 +36,13 @@ extension Temporal {
 #if !hasFeature(Embedded)
     extension Temporal: Swift::Codable {}
 #endif
+
+extension Temporal: Swift::CustomStringConvertible {
+
+    public var description: String {
+        switch self {
+        case .future: return "future"
+        case .past: return "past"
+        }
+    }
+}
